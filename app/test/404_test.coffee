@@ -11,16 +11,3 @@ describe '404', ->
       res.should.have.status 404
       res.should.be.html
       done()
-
-  it 'should respond with json (accepts json)', (done) ->
-    request.get(url).set('Accept', 'application/json').end (res) ->
-      res.should.have.status 404
-      res.should.be.json
-      res.body.should.eql error: message
-      done()
-
-  it 'should respond with text (accepts text)', (done) ->
-    request.get(url).set('Accept', 'text/plain').end (res) ->
-      res.should.have.status 404
-      res.text.should.equal message
-      done()
