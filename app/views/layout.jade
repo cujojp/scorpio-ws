@@ -1,0 +1,18 @@
+include ../common/html/jade-helpers.jade
+
+doctype html
+// ng-app tells angular which part of the pages it should manage 
+html(lang='en', ng-app='ad')
+  head
+    meta(charset='utf-8')
+    -var title = titleHelper(title)
+    title= title
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(href="/css/base.css", rel="stylesheet")
+  body(id="#{view}_view")
+    .container
+      block content
+
+    block scripts
+      script(src="js/libs/require.js")
+

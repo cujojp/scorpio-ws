@@ -1,0 +1,169 @@
+.GRID{}
+  // margin and padding are used interchangably in variable names here. In reality, we're calculating the width of the
+  // container and grid, and specifying margin-left/right:auto to center them.
+  // All of the fixed width grid values are based on having the containerMarginWidth and gridMarginWidths applied by default.
+  // For .full-bleed, the widths are just overridden with 100%. For fixed-width-grids, that's not gonna work so well,
+  // but then there shouldn't be fixed-width grids with .full-bleed
+  //
+  // These numbers coincide with the wireframes/PSD grid measurements as such:
+  // $containerMarginWidth = PAGE
+  // $gridMarginWidth      = MARGIN
+  // $gridColumnWidth      = COLUMN
+  // $gridGutterWidth      = GUTTER
+  // 
+  // These are all converted to percents, so no need to use ems here.
+
+  $gridColumns:               12 !default;
+  $mobileGridColumns:         6  !default;
+  $slimGrid5Columns:          5  !default; // I'm calling grid5 "slimGrid5" for consistency sake, but keeping the old class name around for now, until everyone else's (Glen's) code can be updated.
+
+  // Default 980px-1199px
+  $containerMarginWidth:      34px !default;
+  $gridMarginWidth:           33px !default;
+  $gridColumnWidth:           43px !default;
+  $gridGutterWidth:           30px !default;
+  $slimGridColumnWidth:       54px !default;
+  $slimGridGutterWidth:       18px !default;
+
+  // 1200px+ breakpoint
+  $containerMarginWidth1200:  45px !default;
+  $gridMarginWidth1200:       45px !default;
+  $gridColumnWidth1200:       52px !default;
+  $gridGutterWidth1200:       36px !default;
+  $slimGridColumnWidth1200:   63px !default;
+  $slimGridGutterWidth1200:   24px !default;
+
+  // 5 Column Grid - uses containerMargin1200 and gridMargin1200
+  // $slimGrid5ColumnWidth1200:      204px;
+  // $slimGrid5GutterWidth1200:      23px;
+  $slimGrid5ColumnWidth1200:  188px !default; // at 1200px breakpoint (even though we're using 6 col at 1200+)
+  $slimGrid5GutterWidth1200:  20px !default;
+  $grid5GutterWidth: $slimGrid5GutterWidth1200 !default; // legacy - to keep from breaking old code - should find&replace variable in code later, but don't want to right now because I've made so many changes there's likely to be conflicts.
+
+  // Max breakpoint
+  $containerFullBleedWidthMax:1514px !default;
+  $containerWidthMax:         1400px !default; // if the browser is wider than this, the content will have a set width & side margins will be auto.
+  $gridWidthMax:              1190px !default; // if the browser is wider than this, the content will have a set width & side margins will be auto.
+
+  $containerMarginWidthMax:   79px !default; // these are calculated based on the 1200 values, at 1400.
+  $gridMarginWidthMax:        64px !default;
+  $gridColumnWidthMax:        58px !default;
+  $gridGutterWidthMax:        38px !default;
+
+  // 768px-979px breakpoints (568px-979px)
+  $containerMarginWidth768:   30px !default;
+  $gridMarginWidth768:        29px !default;
+  $gridColumnWidth768:        34px !default;
+  $gridGutterWidth768:        22px !default;
+
+  // 480px-567px breakpoints
+  $containerMarginWidth480:   15px !default;
+  $gridMarginWidth480:        18px !default;
+  $gridColumnWidth480:        54px !default;
+  $gridGutterWidth480:        18px !default;
+
+  // 320px-479px breakpoints
+  $containerMarginWidth320:   10px !default;
+  $gridMarginWidth320:        12px !default;
+  $gridColumnWidth320:        36px !default;
+  $gridGutterWidth320:        12px !default;
+
+
+
+  // Calculated grid values
+  // -----------------------------
+
+  // Default 980px-1199px
+  $containerWidthFullBleed:     980px;
+  $containerWidth:              $containerWidthFullBleed - ($containerMarginWidth*2);
+  $gridWidth:                   ($gridColumns * $gridColumnWidth) + ($gridGutterWidth * ($gridColumns - 1));
+  // we calculate containerWidth based on its margins.
+  // We don't actually need the gridMarginWidth for calculating anything, but it should end up being the same as the amount of space that's left for it in the end.
+  // we calculate gridWidth based on its contents to make sure it's wide enough to hold everything.
+
+  // 1200px breakpoint
+  $containerWidthFullBleed1200: 1200px;
+  $containerWidth1200:          $containerWidthFullBleed1200 - ($containerMarginWidth1200*2);
+  $gridWidth1200:               ($gridColumns * $gridColumnWidth1200) + ($gridGutterWidth1200 * ($gridColumns - 1));
+
+  // 1400px+ breakpoint
+  // $gridWidthMax:                $containerWidthMax - ($gridMarginWidth1200 * 2);
+
+  // 768px-979px breakpoints
+  $containerWidthFullBleed768:  768px;
+  $containerWidth768:           $containerWidthFullBleed768 - ($containerMarginWidth768*2);
+  $gridWidth768:                ($gridColumns * $gridColumnWidth768) + ($gridGutterWidth768 * ($gridColumns - 1));
+
+  // 480px-767px breakpoints
+  $containerWidthFullBleed480:  480px;
+  $containerWidth480:           $containerWidthFullBleed480 - ($containerMarginWidth480*2);
+  $gridWidth480:                ($mobileGridColumns * $gridColumnWidth480) + ($gridGutterWidth480 * ($mobileGridColumns - 1));
+
+  // 320px-479px breakpoints
+  $containerWidthFullBleed320:  320px;
+  $containerWidth320:           $containerWidthFullBleed320 - ($containerMarginWidth320*2);
+  $gridWidth320:                ($mobileGridColumns * $gridColumnWidth320) + ($gridGutterWidth320 * ($mobileGridColumns - 1));
+
+
+
+  // -------------------------
+  // FLUID GRID
+  // -------------------------
+
+  // Default 980px-1199px
+  $fluidContainerWidth:           percentage($containerWidth/980px) !default;
+  $fluidGridWidth:                percentage($gridWidth/$containerWidth) !default;
+  $fluidGridColumnWidth:          percentage($gridColumnWidth/$gridWidth) !default;
+  $fluidGridGutterWidth:          percentage($gridGutterWidth/$gridWidth) !default;
+
+  // Default 980px-1199px slimGrid
+  $fluidSlimGridColumnWidth:      percentage($slimGridColumnWidth/$gridWidth) !default;
+  $fluidSlimGridGutterWidth:      percentage($slimGridGutterWidth/$gridWidth) !default;
+
+  // 1200px+
+  $fluidContainerWidth1200:       percentage($containerWidth1200/1200px) !default;
+  $fluidGridWidth1200-Ratio:      $gridWidth1200/$containerWidth1200 !default;
+  $fluidGridWidth1200:            percentage($gridWidth1200/$containerWidth1200) !default;
+  $fluidGridColumnWidth1200:      percentage($gridColumnWidth1200/$gridWidth1200) !default;
+  $fluidGridGutterWidth1200:      percentage($gridGutterWidth1200/$gridWidth1200) !default;
+
+  // we need to figure out what the maxwidth minus the page margins @ the max width are, to keep the grids lined up.
+  // get the percent width of the page margins at 1200.
+  $containerMarginWidth1400-px:   (100% - $fluidContainerWidth1200)/2 / 100% * $containerWidthMax;
+  $fluidContainerWidthMax-px:     $containerWidthMax; // $containerWidthMax - ($containerMarginWidth1400-px * 2) + 0px;
+
+  $fluidGridWidthMax-px:          $gridWidthMax;
+
+
+  // 1200px+ slimGrid
+  $fluidSlimGridColumnWidth1200:  percentage($slimGridColumnWidth1200/$gridWidth1200) !default;
+  $fluidSlimGridGutterWidth1200:  percentage($slimGridGutterWidth1200/$gridWidth1200) !default;
+
+  // 1200px+ slimGrid5 (not actually 1200+ but that's what we're using as the reference width)
+  $fluidSlimGrid5ColumnWidth1200: percentage($slimGrid5ColumnWidth1200/$gridWidth1200) !default;
+  $fluidSlimGrid5GutterWidth1200: percentage($slimGrid5GutterWidth1200/$gridWidth1200) !default;
+  // Legacy - to keep from breaking old code - should find&replace variable in code later, but don't want to right now because I've made so many changes there's likely to be conflicts.
+  $fluidGrid5ColWidth:            $fluidSlimGrid5ColumnWidth1200;
+  $fluidGrid5GutterWidth:         $fluidSlimGrid5GutterWidth1200;
+
+
+  // 768px-979px (568px-979px)
+  $fluidContainerWidth768:    percentage($containerWidth768/768px) !default;
+  $fluidGridWidth768:         percentage($gridWidth768/$containerWidth768) !default;
+  $fluidGridColumnWidth768:   percentage($gridColumnWidth768/$gridWidth768) !default;
+  $fluidGridGutterWidth768:   percentage($gridGutterWidth768/$gridWidth768) !default;
+
+  // 480px-567px (Mobile)
+  $mobileContainerWidth480:   percentage($containerWidth480/480px) !default;
+  $mobileGridWidth480:        percentage($gridWidth480/$containerWidth480) !default;
+  $mobileGridColumnWidth480:  percentage($gridColumnWidth480/$gridWidth480) !default;
+  $mobileGridGutterWidth480:  percentage($gridGutterWidth480/$gridWidth480) !default;
+
+  // 320px-479px (Mobile)
+  $mobileContainerWidth320:   percentage($containerWidth320/320px) !default;
+  $mobileGridWidth320:        percentage($gridWidth320/$containerWidth320) !default;
+  $mobileGridColumnWidth320:  percentage($gridColumnWidth320/$gridWidth320) !default;
+  $mobileGridGutterWidth320:  percentage($gridGutterWidth320/$gridWidth320) !default;
+
+  // Container width combined with grid width
+  $mobileContainerPlusGridWidth: ($mobileContainerWidth480 * $mobileGridWidth480) / 100%;

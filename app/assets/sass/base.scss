@@ -1,0 +1,22 @@
+// REPEAT VARIABLES & MIXINS
+// -------------------------
+// Required since we compile the responsive stuff separately
+
+@import "compass";
+@import "compass/reset";
+@import "_shared/settings";
+@import "_shared/fn/clearfix";
+@import "_shared/fn/responsivity";
+@import "_shared/fn/grid-calc";
+@import "_shared/fn/semantic-grid";
+@import "_shared/grid";
+
+
+.text-center { @extend %text-center; }
+.text-left { @extend %text-left; }
+.text-right { @extend %text-right; }
+
+// Partial to align Text Left or Right
+%text-center { text-align: center; }
+%text-left { text-align: left; }
+%text-right { text-align: right; }
