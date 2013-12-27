@@ -30,7 +30,6 @@ task 'build', 'Build single application file from source files', ->
       throw err if err
       exec 'coffee --compile lib/app.coffee', (err, stdout, stderr) ->
         throw err if err
-        console.log stdout + stderr
         fs.unlink 'lib/app.coffee', (err) ->
           throw err if err
           console.log 'Done.'
