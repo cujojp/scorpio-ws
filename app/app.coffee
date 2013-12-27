@@ -30,12 +30,12 @@ app.configure ->
 
   ## TODO: this can ONLY run on dev and not prod.
   #  it will cause mass chaos and absolute destruction
-  app.use compass({
-     project:  path.join(__dirname, 'assets')
-     sass:  path.join(__dirname, 'assets/sass')
-     css:  path.join(__dirname, 'public/css')
-     debug: false
-  })
+  #app.use compass({
+     #project:  path.join(__dirname, 'assets')
+     #sass:  path.join(__dirname, 'assets/sass')
+     #css:  path.join(__dirname, 'public/css')
+     #debug: false
+  #})
   app.use express.static "#{__dirname}/public"
   app.use express.session({secret: 'whodunnit'})
   require('./middleware/404')
