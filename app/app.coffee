@@ -33,11 +33,11 @@ app.configure ->
   coffeeDir = "#{__dirname}/asstes/js"
   publicDir = "#{__dirname}/public"
 
-  app.use compass({
-     project:  path.join(__dirname, 'assets')
-     sass:  path.join(__dirname, 'assets/sass')
-     css:  path.join(__dirname, 'public/css')
-     debug: false})
+  #app.use compass({
+     #project:  path.join(__dirname, 'assets')
+     #sass:  path.join(__dirname, 'assets/sass')
+     #css:  path.join(__dirname, 'public/css')
+     #debug: false})
 
   app.use require('connect-assets')(src: "#{__dirname}/assets")
   app.use express.static "#{__dirname}/public"
