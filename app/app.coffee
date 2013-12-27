@@ -1,9 +1,11 @@
 express       = require 'express'
 http          = require 'http'
-colors        = require('colors')
-compass       = require('node-compass')
-path          = require('path')
-#conf          = require '../conf'
+colors        = require 'colors'
+compass       = require 'node-compass'
+path          = require 'path'
+conf          = require '../conf'
+mongoQuery    = "mongodb://#{conf._secret}:#{conf._secret}@ds031608.mongolab.com:31608/#{conf._appId}"
+                
 
 PORT = 8000
 PORT_TEST = PORT + 1
@@ -18,12 +20,22 @@ app.configure ->
   app.set 'port', process.env.PORT or PORT
   app.set 'views', "#{__dirname}/views"
   app.set 'view engine', 'jade'
+  app.set '_mongoUser', conf
   app.use express.favicon()
   app.use express.logger('dev') if app.get('env') is 'development'
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use require('connect-assets')(src: "#{__dirname}/assets")
   app.use express.cookieParser()
+
+  ## TODO: this can ONLY run on dev and not prod.
+  #  it will cause mass chaos and absolute destruction
+  app.use compass({
+     project:  path.join(__dirname, 'assets')
+     sass:  path.join(__dirname, 'assets/sass')
+     css:  path.join(__dirname, 'public/css')
+     debug: false
+  })
   app.use express.static "#{__dirname}/public"
   app.use express.session({secret: 'whodunnit'})
   require('./middleware/404')
@@ -54,5 +66,3 @@ http.createServer(app).listen app.get('port'), ->
   console.log "listening on port #{port} in #{env} mode"
 
 module.exports = app
-
-#dbConnection = new DatabaseModel()
