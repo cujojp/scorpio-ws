@@ -92,6 +92,7 @@ DELETE  /forums/:forum       ->  destroy
 # pathRaw 'user.forum.new' => '/users/:userid/forums/new'
 # pathRaw 'user.message.index' => '/users/:userid/messages'
 # pathRaw 'user.new' => '/users/new'
+
 pathRaw = (name) ->
   result = []
   tokens = name.split '.'

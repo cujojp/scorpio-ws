@@ -17,14 +17,20 @@ filenameToModulename = (filename, camelCase) ->
 autoload = (app, dir, camelCase) ->
   return unless fs.existsSync dir
 
-  for filename in fs.readdirSync(dir)
+  nonCompiledFiles = []
+
+  for realFile in fs.readdirSync(dir)
+    unless realFile is '.DS_Store'
+      nonCompiledFiles.push(realFile)
+
+  for filename in nonCompiledFiles
     pathname = path.join dir, filename
 
     if fs.lstatSync(pathname).isDirectory()
       autoload app, pathname, camelCase
     else
       loadedModule = require(pathname)?(app)
-      modulename = filenameToModulename filename, camelCase
+      modulename = filenameToModulename(filename, camelCase)
       app.locals[modulename] = loadedModule
 
 module.exports = (app) ->
