@@ -1,7 +1,6 @@
 express       = require 'express'
 http          = require 'http'
 colors        = require('colors')
-sass          = require('node-sass')
 compass       = require('node-compass')
 path          = require('path')
 #conf          = require '../conf'
@@ -29,8 +28,7 @@ app.configure ->
      project:  path.join(__dirname, 'assets')
      sass:  path.join(__dirname, 'assets/sass')
      css:  path.join(__dirname, 'public/css')
-     cache: false
-     logging: true
+     debug: false
   })
   app.use express.static "#{__dirname}/public"
   app.use express.session({secret: 'whodunnit'})
