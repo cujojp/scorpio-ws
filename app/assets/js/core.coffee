@@ -1,9 +1,8 @@
-#= require "models/shopping-model"
-#= require "classes/hello"
-#= require "classes/shopping"
+#= require "models/scorpioSockets"
+#= require "views/scoreList"
 
-(($, AngularDemo) ->
-  # Initialize your non Angular Modules + Classes
-  #MOG.router = new MOG.Router()
-) jQuery, AngularDemo
+(($, Scorpio) ->
+  Scorpio.sockets = new Scorpio.App.ScorpioSockets()
+  Scorpio.scoreList = new Scorpio.App.ScoreList()
+) jQuery, Scorpio
 
