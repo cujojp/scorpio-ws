@@ -22,3 +22,4 @@ module.exports = (app) ->
         res.render('404', { status: 404, url: userName })
         break
     
+
