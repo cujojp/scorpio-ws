@@ -8,7 +8,6 @@ connect       = require 'connect'
 conf          = require '../conf'
 mongoQuery    = "mongodb://#{conf._secret}:#{conf._secret}@ds031608.mongolab.com:31608/#{conf._appId}"
                 
-
 PORT = 8000
 PORT_TEST = PORT + 1
 
