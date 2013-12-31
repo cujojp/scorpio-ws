@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  .row
+    .centered.four.columns
+      img(src='/img/_shared/scorpio.gif', alt='logo')
+      h1.text-center #{data._user}
+      p.points #{data._total_score}
+
+      if data.reasons
+        each reasonObj in data.reasons
+          p #{reasonObj.points} point for #{reasonObj.reason}
+
+
+

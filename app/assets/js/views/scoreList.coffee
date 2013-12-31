@@ -86,12 +86,7 @@ class ScoreList
   #
   # Creates a list of data on the index page with pagination for users.
   _renderScoreList: () =>
-    console.log @_scoreData
     @_scoreContainerEl.mustache("userScore", @_scoreData)
      
-
-
-
-
 
 Scorpio.App.ScoreList = ScoreList
