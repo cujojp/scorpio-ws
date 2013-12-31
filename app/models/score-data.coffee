@@ -1,4 +1,5 @@
 mongo = require('mongodb').MongoClient
+pusherClient = require('pusher-node-client').PusherClient
 
 module.exports = (app) =>
   {pathFor} = app.locals.path
@@ -48,8 +49,27 @@ module.exports = (app) =>
         app.locals.scoredata = JSON.stringify(results)
       )
 
+    _initializeBindings: =>
+     
+      pusher_client = new pusherClient
+        appId: @dbConf._pid
+        key: @dbConf._pkey
+        secret: @dbConf._psecret
+
+      console.log pusher_client
+      pres = null
+      pusher_client.on 'connect', () =>
+        pres = pusher_client.subscribe("scorpio_event")
+
+        pres.on 'success', () =>
+          pres.on 'update', (data) =>
+            @_getCollection()
+
+      pusher_client.connect()
+
     init: =>
       @_connectDb()
+      @_initializeBindings()
 
 
   module.exports = new ConnectDataModel

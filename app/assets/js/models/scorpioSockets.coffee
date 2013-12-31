@@ -19,8 +19,6 @@ class ScorpioSockets
   
   _bindListeners: =>
     @channel.bind('update', (event) =>
-      
-      console.log 'event'
       @document.trigger(
         'score-update',
         [ event ]

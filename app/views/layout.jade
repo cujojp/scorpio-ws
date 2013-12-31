@@ -17,10 +17,5 @@ html(lang='en', ng-app='ad')
       != js('vendor')
       != js('site')
       != js('core')
-
-      if scoredata
-        script 
-          Scorpio.data._scoreData = !{scoredata}
-      else 
-        script 
-          Scorpio.data._scoreData = {}
+      script(type='text/javascript', src='js/data.js')
+      
