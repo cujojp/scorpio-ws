@@ -5,7 +5,7 @@ block content
     .centered.four.columns
       img(src='/img/_shared/scorpio.gif', alt='logo')
       h1.text-center #{data._user}
-      p.points #{data._total_score}
+      p.points #{data.total_score} total points
 
       if data.reasons
         each reasonObj in data.reasons
