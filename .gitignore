@@ -1,3 +1,4 @@
 builtAssets
+.DS_Store
 conf.js
 node_modules
