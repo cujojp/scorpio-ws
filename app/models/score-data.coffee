@@ -12,11 +12,11 @@ module.exports = (app) =>
 
     _connectDb: =>
       console.log '-- CONNECTING TO MONGO DB --'.green
-      mongoQuery = "mongodb://#{@dbConf._user}:#{@dbConf._secret}@ds031608.mongolab.com:31608/#{@dbConf._appId}"
-      mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || mongoQuery
+      @mongoQuery = "mongodb://#{@dbConf._user}:#{@dbConf._secret}@ds031608.mongolab.com:31608/#{@dbConf._appId}"
+      @mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || @mongoQuery
 
       mongo.connect(
-        mongoUri,
+        @mongoUri,
         @dbCollection,
         Function.prototype.call.bind(@_dbConnectCallback, @))
 
@@ -40,6 +40,12 @@ module.exports = (app) =>
           @_handleError(error)
         else
           @dbCollection = @database.collection('users')
+          @_getCollection()
+      )
+
+    _getCollection: =>
+      @dbCollection.find().sort({$natural:-1}).toArray((err, results)  =>
+        app.locals.scoredata = JSON.stringify(results)
       )
 
     init: =>
