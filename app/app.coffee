@@ -1,5 +1,4 @@
 express       = require 'express'
-ejs           = require 'ejs'
 http          = require 'http'
 colors        = require 'colors'
 compass       = require 'node-compass'

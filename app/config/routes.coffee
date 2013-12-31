@@ -1,5 +1,3 @@
-ejs = require 'ejs'
-
 module.exports = (app) ->
   {pathRaw} = app.locals.path
   @App = app.locals
