@@ -12,7 +12,7 @@ module.exports = (app) =>
       @init()
 
     _connectDb: =>
-      console.log '-- CONNECTING TO MONGO DB --'.green
+      console.log '-- CONNECTING TO MONGO --'.green
       @mongoQuery = "mongodb://#{@dbConf._user}:#{@dbConf._secret}@ds031608.mongolab.com:31608/#{@dbConf._appId}"
       @mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || @mongoQuery
 
