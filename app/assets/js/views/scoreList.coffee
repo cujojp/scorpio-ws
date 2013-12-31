@@ -75,7 +75,7 @@ class ScoreList
   _renderScoreTemplate: =>
     fail = (response) -> console.error 'failed to render template'
 
-    @jqMustache.load("templates/_userScore.html")
+    @jqMustache.load("/templates/_userScore.html")
       .done( =>
         @_renderScoreList()
       )
