@@ -13,6 +13,8 @@ module.exports = (app) ->
     user = req.params.slug
     data = JSON.parse(app.locals.scoredata)
 
+    console.log 'test'
+
     for obj, i in data
       userName = obj._user
       if user.toLowerCase() == userName.toLowerCase()
